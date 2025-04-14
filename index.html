@@ -1,162 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfoSec Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <script src="js/script.js"></script>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 <body>
-  <nav class="bg-primary text-white p-3 d-flex flex-column fixed-sidebar">
-    <h1 class="h4">InfoSec Dashboard</h1>
-    <ul class="nav flex-column mt-4">
-      <li class="nav-item"><a href="index.html" class="nav-link text-white">Home</a></li>
-      <li class="nav-item"><a href="official.html" class="nav-link text-white">Official Vendors</a></li>
-      <li class="nav-item"><a href="news.html" class="nav-link text-white">Cyber News</a></li>
-      <li class="nav-item"><a href="community.html" class="nav-link text-white">Community</a></li>
-      <li class="nav-item"><a href="training.html" class="nav-link text-white">Training</a></li>
-    </ul>
-  </nav>
-
-  <main class="main-content">
-    <header class="d-flex justify-content-between align-items-center sticky-top bg-white px-4 py-3 border-bottom shadow-sm">
-      <h2 class="h5 mb-0">Dashboard Overview</h2>
-      <div class="dropdown">
-        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-          User Menu
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Logout</a></li>
+  <div class="layout-wrapper">
+    <!-- Sidebar -->
+    <nav class="fixed-sidebar">
+        <div class="sidebar-header text-center py-4">
+          <a href="index.html">
+            <img src="assets/images/infosec-logo.png" alt="InfoSec Home" class="sidebar-logo">
+          </a>
+        </div>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Main landing page with key tools, stats, and quick links.">
+              <i class="bi bi-house-door-fill me-2"></i> Dashboard Overview
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Explore categories like Vulnerability Scanners, SIEM, Endpoint Protection.">
+              <i class="bi bi-shield-lock-fill me-2"></i> Security Tools
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Directory or curated list of approved/security tool vendors.">
+              <i class="bi bi-building me-2"></i> Official Vendors
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Feeds, articles, and insights from cybersecurity news sources.">
+              <i class="bi bi-newspaper me-2"></i> Cyber News & Analysis
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Access to training resources, certifications, and courses.">
+              <i class="bi bi-mortarboard-fill me-2"></i> Learning Platforms
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Forums, Discords, and InfoSec social spaces for collaboration.">
+              <i class="bi bi-people-fill me-2"></i> Community Platforms
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Links or dashboards related to threat reports and advisories (optional but powerful).">
+              <i class="bi bi-graph-up-arrow me-2"></i> Threat Intelligence
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Place to upload/store checklists, playbooks, SOPs, and policies.">
+              <i class="bi bi-folder-fill me-2"></i> Documentation Vault
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Quick-access section for user-saved tools, articles, or vendors.">
+              <i class="bi bi-bookmark-fill me-2"></i> Saved Resources
+            </a>
+          </li>
         </ul>
-      </div>
-    </header>
+      </nav>
 
-    <div class="container-fluid">
-      <h3 class="section-title">Security Tools</h3>
-      <div class="row g-4">
-        <!-- Security Tools Cards -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Vulnerability Scanners</h5>
-              <p class="card-text mb-1">Track tools like Tenable (Nessus)</p>
-              <p class="card-text small text-muted">Vulnerability scanners automatically scan systems, networks, and applications to find weaknesses hackers could exploit.</p>
-              <a href="official.html#vuln" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
+    <!-- Main Content Wrapper -->
+    <div class="main-content-wrapper">
+      <!-- Top Navigation -->
+      <header class="top-nav">
+        <button class="btn add-resource-btn">Add Resource</button>
+        <input type="text" class="form-control form-control-sm me-3" placeholder="Search here...">
+        <div class="me-3">Eng (US)</div>
+        <i class="bi bi-bell-fill me-3"></i>
+        <div class="avatar-dropdown">
+            <img src="assets/images/avatar.png" alt="User Avatar" class="rounded-circle avatar" id="avatar">
+            <ul class="dropdown-menu" id="dropdown-menu">
+              <li><a href="#" class="dropdown-item"><i class="bi bi-person-circle me-2"></i> My Profile</a></li>
+              <li><a href="#" class="dropdown-item"><i class="bi bi-gear-fill me-2"></i> Settings</a></li>
+              <li><a href="#" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+            </ul>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Endpoint Protection</h5>
-              <p class="card-text mb-1">Track tools like CrowdStrike, Defender</p>
-              <p class="card-text small text-muted">Endpoint protection tools protect devices like laptops and desktops from malware, ransomware, and fileless attacks.</p>
-              <a href="official.html#endpoint" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">SIEM Systems</h5>
-              <p class="card-text mb-1">Track tools like Elastic, Security Onion</p>
-              <p class="card-text small text-muted">SIEM (Security Information and Event Management) systems aggregate and analyze security logs from across an organization.</p>
-              <a href="official.html#siem" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Network Security Tools</h5>
-              <p class="card-text mb-1">Track tools like Wireshark, Firewalls</p>
-              <p class="card-text small text-muted">Network security tools are used to monitor, analyze, and control data flowing through a network.</p>
-              <a href="official.html#network" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">IDS/IPS & Monitoring</h5>
-              <p class="card-text mb-1">Track tools like DarkTrace</p>
-              <p class="card-text small text-muted">IDS/IPS tools monitor network or system activity to detect and (in the case of IPS) stop malicious actions. They act as an early warning system against threats.</p>
-              <a href="official.html#ids" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Email Security</h5>
-              <p class="card-text mb-1">Track tools like ProofPoint</p>
-              <p class="card-text small text-muted">Email security tools prevent phishing, malware, and data loss via email.</p>
-              <a href="official.html#email" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">IAM Systems</h5>
-              <p class="card-text mb-1">Track tools like Azure AD</p>
-              <p class="card-text small text-muted">IAM systems manage user identities and control access to resources.</p>
-              <a href="official.html#iam" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Ticket Management</h5>
-              <p class="card-text mb-1">Track tools like ServiceNow, osTicket</p>
-              <p class="card-text small text-muted">Ticketing systems track and document security incidents and IT tasks.</p>
-              <a href="official.html#ticket" class="btn btn-outline-primary btn-sm mt-auto">Manage</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      </header>
 
-      <!--<h3 class="section-title">Cyber Security News & Analysis</h3> -->
-<!-- Cyber Security News & Learning -->
-<div class="row g-4">
-    <!-- Cyber Security News & Analysis -->
-    <div class="col-md-6 col-xl-4">
-      <h3 class="section-title">Cyber Security News & Analysis</h3>
-      <div class="card shadow-sm h-100">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Stay Current with Industry Insights</h5>
-          <p class="card-text">Explore top cybersecurity news platforms and analysis sources to stay informed.</p>
-          <a href="news.html" class="btn btn-outline-primary btn-sm mt-auto">View Resources</a>
-        </div>
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="container-fluid">
+          <!-- Security Tools Section -->
+          <div class="mb-4">
+            <div class="card security-tools-container shadow-sm">
+              <div class="card-body">
+                <h4 class="fw-bold text-start">Security Tools</h4>
+                <p class="text-start text-muted fst-italic">Essential software and systems used to detect, prevent, and respond to cyber threats across networks, endpoints, and infrastructure.</p>
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <div class="security-tools-card vuln">
+                      <i class="bi bi-bug-fill mb-2"></i>
+                      <h5>Vulnerability Scanners</h5>
+                      <p class="small text-muted">Vulnerability scanners automatically scan systems, networks, and applications to find weaknesses hackers could exploit.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card endpoint">
+                      <i class="bi bi-shield-lock-fill mb-2"></i>
+                      <h5>Endpoint Protection</h5>
+                      <p class="small text-muted">Endpoint protection tools protect devices like laptops and desktops from malware, ransomware, and fileless attacks.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card siem">
+                      <i class="bi bi-diagram-3-fill mb-2"></i>
+                      <h5>SIEM Systems</h5>
+                      <p class="small text-muted">SIEM (Security Information and Event Management) systems aggregate and analyze security logs from across an organization.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card network">
+                      <i class="bi bi-wifi mb-2"></i>
+                      <h5>Network Security Tools</h5>
+                      <p class="small text-muted">Network security tools are used to monitor, analyze, and control data flowing through a network.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card ids">
+                      <i class="bi bi-eye-fill mb-2"></i>
+                      <h5>IDS/IPS & Monitoring</h5>
+                      <p class="small text-muted">IDS/IPS (Intrusion Detection System & Intrusion Prevention Systems) tools monitor and stop malicious actions, acting as an early warning system.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card email">
+                      <i class="bi bi-envelope-fill mb-2"></i>
+                      <h5>Email Security</h5>
+                      <p class="small text-muted">Email security tools prevent phishing, malware, and data loss via email.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card iam">
+                      <i class="bi bi-person-badge-fill mb-2"></i>
+                      <h5>IAM Systems</h5>
+                      <p class="small text-muted">IAM systems manage user identities and control access to resources.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="security-tools-card ticket">
+                      <i class="bi bi-file-earmark-text-fill mb-2"></i>
+                      <h5>Ticket Management</h5>
+                      <p class="small text-muted">Ticketing systems track and document security incidents and IT tasks.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  <div class="container dashboard-cards">
+    <!-- Latest Cybersecurity News Card -->
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-newspaper me-2"></i> Latest Security News
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+          <li>Headline 1: [Source]</li>
+          <li>Headline 2: [Source]</li>
+          <li>Headline 3: [Source]</li>
+        </ul>
+        <a href="#" class="btn btn-primary mt-3">View More</a>
       </div>
     </div>
-  
-    <!-- Learning Platforms -->
-    <div class="col-md-6 col-xl-4">
-      <h3 class="section-title">Learning Platforms</h3>
-      <div class="card shadow-sm h-100">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Expand Your Cyber Skills</h5>
-          <p class="card-text">Explore hands-on training, certifications, and learning platforms to grow your InfoSec expertise.</p>
-          <a href="training.html" class="btn btn-outline-primary btn-sm mt-auto">View Resources</a>
+    
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-graph-up-arrow me-2"></i> External Cert Tracker
+      </div>
+      <div class="card-body">
+        <p><strong>Security+ Certification:</strong></p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
         </div>
+        <a href="#" class="btn btn-primary mt-3">View More</a>
       </div>
     </div>
-  </div> 
-  
-  </div> 
 
-    <footer class="text-center py-3 mt-4 border-top">
-      <small>&copy; 2025 InfoSec Resource Dashboard</small>
-    </footer>
-  </main>
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-bookmark-fill me-2"></i> My Toolkit
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+          <li><i class="bi bi-link-45deg"></i> Saved Resource 1</li>
+          <li><i class="bi bi-link-45deg"></i> Saved Resource 2</li>
+          <li><i class="bi bi-link-45deg"></i> Saved Resource 3</li>
+        </ul>
+        <a href="#" class="btn btn-primary mt-3">View More</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-lightbulb me-2"></i> Security Blogs & Expert Insights
+      </div>
+      <div class="card-body">
+        <ul id="security-blogs-list" class="list-unstyled">
+          <li><a href="https://blog.example1.com" target="_blank">Expert Blog 1</a></li>
+          <li><a href="https://blog.example2.com" target="_blank">Expert Blog 2</a></li>
+          <li><a href="https://blog.example3.com" target="_blank">Expert Blog 3</a></li>
+        </ul>
+        <a href="security-blogs.html" class="btn btn-primary mt-3">View More</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-people-fill me-2"></i> Community Buzz
+      </div>
+      <div class="card-body">
+        <p><strong>Recent Post:</strong> Comment or post snippet from Reddit, Discord, or Stack Exchange.</p>
+        <a href="#" class="btn btn-primary mt-3">View More</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-calendar-event me-2"></i> This Week’s Focus
+      </div>
+      <div class="card-body">
+        <p><strong>Note-to-self:</strong> Current goal or reminder.</p>
+        <form>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Update your weekly focus">
+          </div>
+        </form>
+        <a href="#" class="btn btn-primary mt-3">View More</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-trophy me-2"></i> Capture The Flag (CTF) Challenges
+      </div>
+      <div class="card-body">
+        <p>Practice environments to sharpen offensive and defensive skills.</p>
+        <ul class="list-unstyled">
+          <li><a href="https://tryhackme.com" target="_blank">TryHackMe</a></li>
+          <li><a href="https://hackthebox.com" target="_blank">Hack The Box</a></li>
+          <li><a href="https://ctftime.org" target="_blank">CTFtime</a></li>
+        </ul>
+        <a href="ctf-challenges.html" class="btn btn-primary mt-3">View More</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-file-earmark-code-fill me-2"></i> Cheat Sheets
+      </div>
+      <div class="card-body">
+        <p>CLI commands, Nmap syntax, Linux security hardening tips, regex, firewall rules.</p>
+        <p>Downloadable or copy-ready resources.</p>
+        <ul>
+          <li><a href="cheatsheets/cli-commands.pdf" target="_blank">CLI Commands</a></li>
+          <li><a href="cheatsheets/nmap-syntax.pdf" target="_blank">Nmap Syntax</a></li>
+          <li><a href="cheatsheets/linux-hardening.pdf" target="_blank">Linux Security Hardening</a></li>
+        </ul>
+        <a href="cheat-sheets.html" class="btn btn-primary mt-3">View More</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-shield-fill-check me-2"></i> Quizzes on Information Security Topics
+      </div>
+      <div class="card-body">
+        <p>Test your knowledge on various information security topics with interactive quizzes.</p>
+        <p>Get instant feedback and track your progress.</p>
+        <a href="quizzes.html" class="btn btn-primary mt-3">Start Quizzing</a>
+      </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+          <i class="bi bi-folder-fill me-2"></i> My Training Documents (NOTES)
+        </div>
+        <div class="card-body">
+          <p>Upload and manage your training-related documents here.</p>
+          <form id="upload-form">
+            <div class="mb-3">
+              <label for="training-document" class="form-label">Upload Document:</label>
+              <input type="file" class="form-control" id="training-document" name="training-document" accept=".pdf,.doc,.docx,.xlsx,.ppt,.pptx,.txt">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </form>
+        </div>
+      </div>
+  </div>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer-bar">
+        <p class="mb-0 text-center">
+          © 2025, InfoSec HQ. Made with <i class="bi bi-heart-fill text-danger"></i> by KerseyKreative.
+        </p>
+      </footer>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
