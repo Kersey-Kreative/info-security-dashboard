@@ -546,3 +546,257 @@ body {
       padding: 10px;
     }
   }
+
+  /* Mobile Responsive Styles */
+@media (max-width: 991px) {
+    /* Adjust main content wrapper to take full width */
+    .main-content-wrapper {
+      margin-left: 0;
+      width: 100%;
+    }
+    
+    /* Make sidebar slide in from left on mobile */
+    .fixed-sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1100;
+    }
+    
+    /* Show sidebar when active class is added */
+    .fixed-sidebar.active {
+      transform: translateX(0);
+    }
+    
+    /* Style the hamburger menu button */
+    .navbar-toggler {
+      border: none;
+      background: transparent;
+      color: var(--rich-deep-blue);
+      font-size: 1.5rem;
+      padding: 0.25rem 0.5rem;
+      margin-right: 1rem;
+    }
+    
+    /* Adjust card grid for smaller screens */
+    .dashboard-cards {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Make top nav more mobile-friendly */
+    .top-nav {
+      padding: 0 10px;
+    }
+    
+    .top-nav input {
+      max-width: 130px;
+    }
+    
+    /* Hide language selector on mobile */
+    .top-nav .me-3:not(.bi) {
+      display: none;
+    }
+  }
+  
+  /* Smaller screens (phones) */
+  @media (max-width: 576px) {
+    /* Stack security tools cards */
+    .security-tools-container .row .col-md-3 {
+      width: 100%;
+    }
+    
+    /* Make cards take full width */
+    .card {
+      width: 100%;
+    }
+    
+    /* Adjust padding */
+    .main-content {
+      padding: 10px;
+    }
+    
+    /* Make add resource button smaller */
+    .add-resource-btn {
+      font-size: 0.75rem;
+      padding: 5px 10px;
+    }
+  }
+  
+  /* Add overlay when sidebar is open on mobile */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+  
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  /* Enhanced Responsive Styles */
+
+/* Fix for the mobile sidebar toggle */
+.fixed-sidebar.mobile-active {
+    transform: translateX(0);
+  }
+  
+  /* Make sidebar usable on medium devices */
+  @media (max-width: 991px) {
+    .navbar-toggler {
+      display: block;
+    }
+  }
+  
+  /* Better handling for security tools cards on tablets */
+  @media (max-width: 768px) {
+    .security-tools-card {
+      height: auto;
+      min-height: 200px;
+      padding: 15px 10px;
+    }
+    
+    .top-nav {
+      justify-content: space-between;
+    }
+    
+    /* Ensure search is visible but not too big */
+    .top-nav input {
+      max-width: 150px;
+    }
+  }
+  
+  /* Additional mobile optimizations */
+  @media (max-width: 576px) {
+    /* Improve card headers on small screens */
+    .card-header {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+    
+    /* Make buttons full width on mobile */
+    .card .btn-primary {
+      width: 100%;
+      padding: 8px;
+    }
+    
+    /* Adjust footer text size */
+    .footer-bar {
+      font-size: 0.75rem;
+      height: auto;
+      padding: 10px;
+    }
+    
+    /* Better avatar dropdown positioning */
+    .dropdown-menu {
+      right: -10px;
+      width: 200px;
+    }
+    
+    /* Reduce icon sizes on mobile */
+    .security-tools-card i {
+      font-size: 1.5rem;
+    }
+    
+    /* Stack form elements */
+    .card input, .card button {
+      margin-bottom: 10px;
+    }
+  }
+  
+  /* Fix for overflow issues in main content */
+  .container-fluid {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  /* Make sure images are responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Fix for sidebar scroll issues on smaller heights */
+  @media (max-height: 700px) {
+    .fixed-sidebar {
+      overflow-y: auto;
+    }
+    
+    .fixed-sidebar .nav-link {
+      padding: 5px 15px;
+    }
+  }
+
+  /* Mobile menu fix */
+.sidebar-open .fixed-sidebar {
+    transform: translateX(0);
+  }
+  
+  /* This ensures the sidebar shows properly when toggled */
+  .fixed-sidebar.mobile-active {
+    transform: translateX(0);
+    width: 250px;
+    display: block;
+  }
+  
+  /* Improve overlay behavior */
+  .sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+  
+  /* Ensure the sidebar is initially hidden on mobile but can be shown */
+  @media (max-width: 991px) {
+    .fixed-sidebar {
+      display: block;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Make sure the hamburger button is visible */
+    .navbar-toggler {
+      display: block !important;
+      cursor: pointer;
+    }
+    
+    /* Prevent content from shifting when sidebar opens */
+    body.sidebar-open {
+      overflow: hidden;
+    }
+  }
+
+  /* Position sidebar close button at top right */
+.sidebar-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1101;
+  filter: invert(1); /* Makes the button white on dark background */
+}
+
+.fixed-sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.fixed-sidebar.mobile-active {
+  transform: translateX(0);
+}
+
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+#sidebar-overlay.active {
+  display: block;
+}
